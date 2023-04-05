@@ -14,7 +14,7 @@ import connectDB from "./config/db.js";
 // routers
 import bookRouter from "./routes/bookRoutes.js";
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
