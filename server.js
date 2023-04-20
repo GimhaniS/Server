@@ -20,7 +20,7 @@ const port = process.env.PORT || 5000;
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
-app.use(cors({ origin: "http://localhost:5000", optionsSuccessStatus: 200 }));
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
