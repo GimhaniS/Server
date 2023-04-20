@@ -15,8 +15,7 @@ import connectDB from "./config/db.js";
 import bookRouter from "./routes/bookRoutes.js";
 import authRouter from "./routes/authRoutes.js";
 
-const port = process.env.PORT || 5000;
-
+const port = process.env.PORT || "0.0.0.0";
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
