@@ -43,8 +43,8 @@ const register = async (req, res) => {
       password: password,
       confirmPassword: confirmPassword,
       userType: userType,
+      token: token,
     },
-    token,
   });
 };
 
