@@ -13,7 +13,7 @@ const register = async (req, res) => {
     confirmPassword,
     userType,
   } = req.body;
-
+  console.log("res", res);
   if (!fullName || !email || !password || !confirmPassword) {
     throw new BadRequestError("Please Provide values");
   }
