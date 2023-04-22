@@ -72,11 +72,8 @@ const login = async (req, res) => {
   user.password = undefined;
 
   res.status(StatusCodes.OK).json({
-    user: {
-      email: email,
-      password: password,
-      token: token,
-    },
+    user: user,
+    token: token,
   });
 };
 export { register, login };
