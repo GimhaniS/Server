@@ -69,6 +69,14 @@ const login = async (req, res) => {
   const token = user.createJWT();
   user.password = undefined;
 
-  res.status(StatusCodes.OK).json({ user, token });
+  res.status(StatusCodes.OK).json({
+    user: {
+      fullName: fullName,
+      email: email,
+      contactNumber: contactNumber,
+      userType: userType,
+      token: token,
+    },
+  });
 };
 export { register, login };
