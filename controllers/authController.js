@@ -59,7 +59,7 @@ const login = async (req, res) => {
   }
   const user = await userModel.findOne({ email }).select("+password _id");
   if (!user) {
-    res.status(400).json({ message: "Invalid Credentials" });
+    res.status(400).json({ message: "User does not exists" });
   }
   console.log("user", user);
   // if (!user) {
