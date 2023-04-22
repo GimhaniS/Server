@@ -56,6 +56,8 @@ const login = async (req, res) => {
   }
 
   const user = await userModel.findOne({ email }).select("+password");
+
+  console.log("user", user);
   if (!user) {
     throw new UnAuthenticatedError("Invalid Credentials");
   }
