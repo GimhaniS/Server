@@ -55,18 +55,20 @@ const login = async (req, res) => {
   //   throw new BadRequestError("Please Provide email and password");
   // }
   if (!email || !password) {
-    res.status(400).send("Please Provide email and password");
+    res.status(400).send({ message: "Please Provide email and password" });
   }
   const user = await userModel.findOne({ email }).select("+password");
-
+  if (!user) {
+    res.status(404).send({ message: "Invalid Credentials" });
+  }
   console.log("user", user);
   // if (!user) {
   //   throw new UnAuthenticatedError("Invalid Credentials");
   // }
 
   const isPasswordCorrect = await user.comparePassword(password);
-  if (!user || !isPasswordCorrect) {
-    res.status(404).send("Invalid Credentials");
+  if (!isPasswordCorrect) {
+    res.status(404).send({ message: "Invalid Credentials" });
   }
   // if (!isPasswordCorrect) {
   //   throw new UnAuthenticatedError("Invalid Credentials");
