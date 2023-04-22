@@ -57,7 +57,7 @@ const login = async (req, res) => {
   if (!email || !password) {
     res.status(400).json({ message: "Please Provide email and password" });
   }
-  const user = await userModel.findOne({ email }).select("+password");
+  const user = await userModel.findOne({ email }).select("+password _id");
   if (!user) {
     res.status(400).json({ message: "Invalid Credentials" });
   }
