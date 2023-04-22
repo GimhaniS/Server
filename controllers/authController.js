@@ -72,7 +72,7 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({
     user: {
       email: email,
-      contactNumber: contactNumber,
+      password: password,
       token: token,
     },
   });
