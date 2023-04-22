@@ -51,22 +51,26 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
   console.log(email, password);
+  // if (!email || !password) {
+  //   throw new BadRequestError("Please Provide email and password");
+  // }
   if (!email || !password) {
-    throw new BadRequestError("Please Provide email and password");
+    res.status(400).send("Please Provide email and password");
   }
-
   const user = await userModel.findOne({ email }).select("+password");
 
   console.log("user", user);
-  if (!user) {
-    throw new UnAuthenticatedError("Invalid Credentials");
-  }
+  // if (!user) {
+  //   throw new UnAuthenticatedError("Invalid Credentials");
+  // }
 
   const isPasswordCorrect = await user.comparePassword(password);
-
-  if (!isPasswordCorrect) {
-    throw new UnAuthenticatedError("Invalid Credentials");
+  if (!user || !isPasswordCorrect) {
+    res.status(404).send("Invalif Credentials");
   }
+  // if (!isPasswordCorrect) {
+  //   throw new UnAuthenticatedError("Invalid Credentials");
+  // }
 
   const token = user.createJWT();
   user.password = undefined;
