@@ -55,20 +55,24 @@ const login = async (req, res) => {
   //   throw new BadRequestError("Please Provide email and password");
   // }
   if (!email || !password) {
-    res.status(400).send({ message: "Please Provide email and password" });
+    res.status(400).json({ message: "Please Provide email and password" });
   }
   const user = await userModel.findOne({ email }).select("+password");
   if (!user) {
-    res.status(404).send({ message: "Invalid Credentials" });
+    res.status(400).json({ message: "Invalid Credentials" });
   }
   console.log("user", user);
   // if (!user) {
   //   throw new UnAuthenticatedError("Invalid Credentials");
   // }
+  //  Convert user id (ObjectId) to a string
+  const userId = user._id.toHexString();
+  //  Now user id is a string
+  console.log("userId", userId);
 
   const isPasswordCorrect = await user.comparePassword(password);
   if (!isPasswordCorrect) {
-    res.status(404).send({ message: "Invalid Credentials" });
+    res.status(400).json({ message: "Invalid Credentials" });
   }
   // if (!isPasswordCorrect) {
   //   throw new UnAuthenticatedError("Invalid Credentials");
