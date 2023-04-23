@@ -91,4 +91,14 @@ const updateAbook = async (req, res) => {
   }
   res.status(StatusCodes.OK).json(`${updatedBook} book updated`);
 };
-export { getAllBooks, addAbook, deleteABook, updateAbook };
+
+const addABookByUser = async (req, res) => {
+  const book = await bookModel.create(req, body);
+
+  if (book) {
+    res.status(StatusCodes.CREATED).json({ book });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json("Book adding failed");
+  }
+};
+export { getAllBooks, addAbook, deleteABook, updateAbook, addABookByUser };

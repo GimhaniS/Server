@@ -39,6 +39,11 @@ const BookSchema = new mongoose.Schema(
     bookCover: {
       type: Boolean,
     },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );
