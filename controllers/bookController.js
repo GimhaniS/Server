@@ -151,4 +151,20 @@ const addABookByUser = async (req, res) => {
   }
 };
 
-export { getAllBooks, deleteABook, updateAbook, addABookByUser };
+const getABookByUserId = async (req, res) => {
+  const { userId } = req.body;
+  const bookByUser = await Book.find({ userId });
+
+  if (bookByUser) {
+    res.status(StatusCodes.CREATED).json({ bookByUser });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json("Books not found");
+  }
+};
+export {
+  getAllBooks,
+  deleteABook,
+  updateAbook,
+  addABookByUser,
+  getABookByUserId,
+};

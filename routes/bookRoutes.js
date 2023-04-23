@@ -6,6 +6,7 @@ import {
   deleteABook,
   updateAbook,
   addABookByUser,
+  getABookByUserId,
 } from "../controllers/bookController.js";
 
 // router.route("/getAllBooks").get(getAllBooks);
@@ -16,5 +17,6 @@ router.get("/getAllBooks", getAllBooks);
 router.delete("/deleteABook/:id", deleteABook);
 router.put("/updateABook/:id", updateAbook);
 router.post("/addABookByUser", addABookByUser);
+router.get("/getABookByUserId", getABookByUserId);
 
 export default router;
