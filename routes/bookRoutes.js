@@ -15,7 +15,7 @@ import {
 router.get("/getAllBooks", getAllBooks);
 router.post("/addaBook", addAbook);
 router.delete("/deleteABook/:id", deleteABook);
-router.post("/updateABook/:id", updateAbook);
+router.put("/updateABook/:id", updateAbook);
 router.post("/addABookByUser", addABookByUser);
 
 export default router;

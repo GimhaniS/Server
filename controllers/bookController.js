@@ -5,46 +5,50 @@ import { BadRequestError } from "../errors/index.js";
 const getAllBooks = async (req, res) => {
   const AllBooks = await bookModel.find();
 
-  res.status(StatusCodes.OK).json({
-    AllBooks,
-  });
+  if (AllBooks) {
+    res.status(StatusCodes.OK).json({
+      AllBooks,
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json("There is no books");
+  }
 };
 
-const addAbook = async (req, res) => {
-  console.log("req", req);
-  const {
-    ISBN,
-    BookName,
-    Author,
-    Price,
-    Publisher,
-    Place,
-    Edition,
-    PublishedYear,
-    BuyDate,
-    Category,
-    SubCategory,
-    bookCover,
-  } = req.body;
+// const addAbook = async (req, res) => {
+//   console.log("req", req);
+//   const {
+//     ISBN,
+//     BookName,
+//     Author,
+//     Price,
+//     Publisher,
+//     Place,
+//     Edition,
+//     PublishedYear,
+//     BuyDate,
+//     Category,
+//     SubCategory,
+//     bookCover,
+//   } = req.body;
 
-  const newBook = {
-    ISBN,
-    BookName,
-    Author,
-    Price,
-    Publisher,
-    Place,
-    Edition,
-    PublishedYear,
-    BuyDate,
-    Category,
-    SubCategory,
-    bookCover,
-  };
-  console.log("newBook", newBook);
-  const AddaBookRes = await bookModel.create(newBook);
-  res.status(StatusCodes.CREATED).json({ AddaBookRes });
-};
+//   const newBook = {
+//     ISBN,
+//     BookName,
+//     Author,
+//     Price,
+//     Publisher,
+//     Place,
+//     Edition,
+//     PublishedYear,
+//     BuyDate,
+//     Category,
+//     SubCategory,
+//     bookCover,
+//   };
+//   console.log("newBook", newBook);
+//   const AddaBookRes = await bookModel.create(newBook);
+//   res.status(StatusCodes.CREATED).json({ AddaBookRes });
+// };
 
 const deleteABook = async (req, res) => {
   const bookId = req.params.id;
@@ -61,7 +65,21 @@ const deleteABook = async (req, res) => {
 
 const updateAbook = async (req, res) => {
   const bookId = req.params.id;
-  const { BookName, Author, Rating, BookCover } = req.body;
+  const {
+    ISBN,
+    BookName,
+    Author,
+    Price,
+    Publisher,
+    Place,
+    Edition,
+    PublishedYear,
+    BuyDate,
+    Category,
+    SubCategory,
+    bookCover,
+    createdBy,
+  } = req.body;
   const newlyUpdatedBook = {
     ISBN,
     BookName,
@@ -75,6 +93,7 @@ const updateAbook = async (req, res) => {
     Category,
     SubCategory,
     bookCover,
+    createdBy,
   };
   console.log("id", bookId);
   console.log("req.params", req.params);
@@ -131,4 +150,5 @@ const addABookByUser = async (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json("Book adding failed");
   }
 };
+
 export { getAllBooks, addAbook, deleteABook, updateAbook, addABookByUser };
