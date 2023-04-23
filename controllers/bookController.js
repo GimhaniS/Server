@@ -93,7 +93,37 @@ const updateAbook = async (req, res) => {
 };
 
 const addABookByUser = async (req, res) => {
-  const book = await bookModel.create(req, body);
+  const {
+    ISBN,
+    BookName,
+    Author,
+    Price,
+    Publisher,
+    Place,
+    Edition,
+    PublishedYear,
+    BuyDate,
+    Category,
+    SubCategory,
+    bookCover,
+    createdBy,
+  } = req.body;
+  const newBook = {
+    ISBN,
+    BookName,
+    Author,
+    Price,
+    Publisher,
+    Place,
+    Edition,
+    PublishedYear,
+    BuyDate,
+    Category,
+    SubCategory,
+    bookCover,
+    createdBy,
+  };
+  const book = await bookModel.create(newBook);
 
   if (book) {
     res.status(StatusCodes.CREATED).json({ book });
