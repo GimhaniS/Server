@@ -152,8 +152,8 @@ const addABookByUser = async (req, res) => {
 };
 
 const getAllBookByUserId = async (req, res) => {
-  const { userId } = req.body;
-  const bookByUser = await bookModel.find({ userId });
+  const { createdBy } = req.body;
+  const bookByUser = await bookModel.find({ createdBy });
   console.log("bookByUser");
   if (bookByUser) {
     res.status(StatusCodes.OK).json({ bookByUser });
