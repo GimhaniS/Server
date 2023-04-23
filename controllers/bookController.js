@@ -151,4 +151,4 @@ const addABookByUser = async (req, res) => {
   }
 };
 
-export { getAllBooks, addAbook, deleteABook, updateAbook, addABookByUser };
+export { getAllBooks, deleteABook, updateAbook, addABookByUser };
