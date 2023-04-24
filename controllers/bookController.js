@@ -2,15 +2,14 @@ import bookModel from "../models/bookModel.js";
 import { StatusCodes } from "http-status-codes";
 import { BadRequestError } from "../errors/index.js";
 
-const getAllBooks = async (req, res) => {
-  const AllBooks = await bookModel.find();
-
-  if (AllBooks) {
-    res.status(StatusCodes.OK).json({
-      AllBooks,
-    });
+const getAbookById = async (req, res) => {
+  const { _id } = req.body;
+  const bookById = await bookModel.find({ _id });
+  console.log("the book", bookById);
+  if (bookById) {
+    res.status(StatusCodes.OK).json({ bookById });
   } else {
-    res.status(StatusCodes.NOT_FOUND).json("There is no books");
+    res.status(StatusCodes.NOT_FOUND).json("Book not found");
   }
 };
 
@@ -162,7 +161,7 @@ const getAllBookByUserId = async (req, res) => {
   }
 };
 export {
-  getAllBooks,
+  getAbookById,
   deleteABook,
   updateAbook,
   addABookByUser,
