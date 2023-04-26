@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-const multer = require("multer");
+import multer from "multer";
 import {
   getAbookById,
   deleteABook,
@@ -34,6 +34,6 @@ router.delete("/deleteABook/:id", deleteABook);
 router.put("/updateABook/:id", updateAbook);
 router.post("/addABookByUser", addABookByUser);
 router.get("/getAllBookByUserId", getAllBookByUserId);
-router.post("/book/image", upload.single("bookImage"), bookCoverUploadByBook);
+router.post("/book/image", upload.single("bookCover"), bookCoverUploadByBook);
 
 export default router;
