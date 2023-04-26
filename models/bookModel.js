@@ -37,7 +37,7 @@ const BookSchema = new mongoose.Schema(
       type: Array,
     },
     bookCover: {
-      type: Boolean,
+      type: String,
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

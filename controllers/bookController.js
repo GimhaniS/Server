@@ -160,10 +160,61 @@ const getAllBookByUserId = async (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json("Books not found");
   }
 };
+
+const bookCoverUploadByBook = async (req, res) => {
+  const bookcvr = req.file.path;
+  const bookId = req.params.id;
+  console.log("imagePath", imagePath);
+  console.log("bookId", bookId);
+  const {
+    ISBN,
+    BookName,
+    Author,
+    Price,
+    Publisher,
+    Place,
+    Edition,
+    PublishedYear,
+    BuyDate,
+    Category,
+    SubCategory,
+    bookCover,
+    createdBy,
+  } = req.body;
+  const newlyUpdatedBook = {
+    ISBN,
+    BookName,
+    Author,
+    Price,
+    Publisher,
+    Place,
+    Edition,
+    PublishedYear,
+    BuyDate,
+    Category,
+    SubCategory,
+    bookCover: bookcvr,
+    createdBy,
+  };
+  const bookCvrupdatedBook = await bookModel.findByIdAndUpdate(
+    bookId,
+    newlyUpdatedBook,
+    {
+      new: true,
+    }
+  );
+  if (!bookCvrupdatedBook) {
+    return res.status(StatusCodes.NOT_FOUND).json("Book not found");
+  }
+  res.status(StatusCodes.OK).json(`${bookCvrupdatedBook} book updated`);
+
+  // Save the imagePath to your database or use it as required
+};
 export {
   getAbookById,
   deleteABook,
   updateAbook,
   addABookByUser,
   getAllBookByUserId,
+  bookCoverUploadByBook,
 };
